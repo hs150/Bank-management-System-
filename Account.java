@@ -5,11 +5,13 @@ class Account {
     private String accountNumber;
     private String accountHolderName;
     private double balance;
+    private int passWord;
 
-    public Account(String accountNumber, String accountHolderName) {
-        this.accountNumber = accountNumber;
+    public Account(String accountNumber, String accountHolderName, int passWord) {
         this.accountHolderName = accountHolderName;
+        this.accountNumber = accountNumber;
         this.balance = 0.0;
+        this.passWord = passWord;
     }
 
     public String getAccountNumber() {
@@ -24,12 +26,16 @@ class Account {
         return balance;
     }
 
+    public int getPassWord() {
+        return passWord;
+    }
+
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
             System.out.println("Deposited: " + amount);
         } else {
-            System.out.println("Deposit amount must be positive.");
+            System.out.println("Amount must be positive.");
         }
     }
 
@@ -50,9 +56,9 @@ class BankingSystem {
         accounts = new HashMap<>();
     }
 
-    public void createAccount(String accountNumber, String accountHolderName) {
+    public void createAccount(String accountNumber, String accountHolderName, int passWord) {
         if (!accounts.containsKey(accountNumber)) {
-            Account newAccount = new Account(accountNumber, accountHolderName);
+            Account newAccount = new Account(accountNumber, accountHolderName, passWord);
             accounts.put(accountNumber, newAccount);
             System.out.println("Account created successfully for " + accountHolderName);
         } else {
@@ -64,4 +70,3 @@ class BankingSystem {
         return accounts.get(accountNumber);
     }
 }
-
